@@ -21,5 +21,8 @@ export default class Reactor {
   react(){
     // Start calling all service Providers
     serviceProviderContainer.dispatch()
+
+    // Scanning all routes
+    routerServiceProvider.scan()
   }
 }
