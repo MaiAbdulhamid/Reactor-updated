@@ -2,7 +2,6 @@
 import './login.scss'
 import { Component } from 'react'
 import Is from '@flk/supportive-is'
-//import Is from 'flk-supportive-is'
 
 class Login extends Component {
 
