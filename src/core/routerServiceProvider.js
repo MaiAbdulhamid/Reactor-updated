@@ -1,9 +1,14 @@
 import ReactDOM from "react-dom"
 import {
-  BrowserRouter as Router,
+  Router,
   Switch,
   Route
 } from "react-router-dom";
+import { createBrowserHistory } from 'history'
+import Middleware from "./middleware";
+
+// Custom History
+const history = createBrowserHistory()
 
 // Register all routes
 const routesList = []
@@ -11,21 +16,43 @@ const routesList = []
 /**
  * Add new route to routesList
  * @param {string} path 
- * @param {React.Component} component 
+ * @param {React.Component} component
+ * @param {function | array | null} middleware
  */
-function addRouter(path, component){
+function addRouter(path, component, middleware = null){
   routesList.push({
     path,
-    component
+    component,
+    middleware
   })
 }
+/**
+ * Navigate to given path
+ * 
+ * @param {string} path
+ */
+export function navigateTo(path) {
+  history.push(path)
+}
+/**
+ * return all Application's routes
+ * @returns {array}
+ */
 
 function Routes() {
+  /**
+   * Each route contains:
+   * path: the path to page
+   * component: that will be rendered by the path
+   * middleware: applied before accessing the component page
+   */
   const routes = routesList.map((route, index) => (
-    <Route key={index} exact={true} path={route.path} component={route.component}></Route>
+    <Route key={index} exact={true} path={route.path} comp={route.component}>
+      <Middleware route={route} history={history} />
+    </Route>
   ))
   return (
-    <Router>
+    <Router history={history} >
       <Switch>
         {routes}
       </Switch>

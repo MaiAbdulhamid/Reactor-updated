@@ -7,7 +7,11 @@
   form{
     width: 40%;
     margin: 2rem auto;
-
+    .error-message{
+      margin: 0rem 1rem;
+      font-weight: bold;
+      color: rgb(185, 0, 0);
+    }
     .form-group{
       margin: 1rem;
       .form-control{
