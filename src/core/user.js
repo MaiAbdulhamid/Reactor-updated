@@ -10,7 +10,7 @@ class User {
    * @returns {boolean}
    */
   isLoggedIn(){
-    return this.userData !== true
+    return this.userData !== null;
   }
   /**
    * Log in the user
@@ -26,4 +26,4 @@ class User {
   }
 }
 
-export default new User
+export default new User()

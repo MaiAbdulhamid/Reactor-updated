@@ -1,22 +1,9 @@
 import Login from './components/Login'
 import Users from './components/Users'
-import user from 'user'
-import { Redirect } from 'react-router-dom'
-
-function isLoggedIn (route, history){
-  if( !user.isLoggedIn() ){
-    return <Redirect to='/login' />
-  }
-}
-
-function alreadyLogged(){
-  if(user.isLoggedIn){
-    return <Redirect to='/users' />
-  }
-}
+import Guardian from './middleware/guardian'
+import ReverseGuardian from './middleware/reverse-guardian'
 
 export default function(route) {
-  route('/login', Login, alreadyLogged)
-  route('/users', Users, isLoggedIn)
-
+  route('/login', Login, [Guardian])
+  route('/users', Users, [ReverseGuardian])
 }

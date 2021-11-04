@@ -6,7 +6,7 @@ import { title, description } from "core/metadata";
 import { login } from "modules/users/services/auth";
 import user from "user";
 import { navigateTo } from "core/routerServiceProvider"
-
+import cache from "core/cache";
  
 class Login extends ReactorComponent {
   /**
@@ -20,6 +20,7 @@ class Login extends ReactorComponent {
   init(){
     title('Login Page')
     description('Welcome to Login Page Form.')
+    //cache.set('user', {name: 'Mai', id: 1, age: 27})
   }
 
   /**
@@ -30,7 +31,7 @@ class Login extends ReactorComponent {
     this.set('errors', null)
     try {
       let { data } = await login(e.target)
-      user.login(data)
+      user.login(data.user)
       navigateTo('/users')
     } catch (error) {
       let errorMessage = error.response.data.error;

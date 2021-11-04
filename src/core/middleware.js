@@ -1,5 +1,5 @@
-import Is from '@flk/supportive-is';
 import React from 'react'
+import Is from '@flk/supportive-is';
 
 export default function Middleware(props) {
   let { route, history } = props
@@ -22,5 +22,4 @@ export default function Middleware(props) {
 
   }
   return <route.component history={history}/>
-
 }
